@@ -38,4 +38,12 @@ public class Hangman implements HangmanGame {
         // UNDERSTAND: Variable declaration of immutable GameStatistics state that accumulates results across games.
         GameStatistics stats = GameStatistics.empty();
         boolean playAgain = true;
+
+        // UNDERSTAND: Loop terminates when the user chooses not to continue (i.e. playAgain becomes false).
+        // DECISION: A while-loop is chosen because the total number of game iterations is dynamic and depends on user input.
+        while (playAgain) {
+            String secretWord = getRandomWord(filename);
+            int guessesRemaining = playOneGame(secretWord);
+            boolean won = guessesRemaining > 0;
+            stats = stats.withGame(won, guessesRemaining);
 }
