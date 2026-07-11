@@ -8,6 +8,7 @@ import ph.edu.dlsu.lbycpob.hangman.statistics.GameStatistics;
 
 import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Hangman implements HangmanGame {
     // UNDERSTAND: Dependency injects these components to decouple random generation, file parsing, and display rendering.
@@ -54,4 +55,20 @@ public class Hangman implements HangmanGame {
 
         stats(stats.gamesPlayed(), stats.gamesWon(), stats.bestGuessesRemaining());
     }
+
+    @Override
+    public void intro() {
+        // UNDERSTAND: Input/Output operation sending the welcome text block directly to the standard output.
+        // DECISION: Using simple print statements to format the banner without external dependency overhead.
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("            Welcome to Hangman!             ");
+        System.out.println(" I will think of a random word while you try to guess its letters. ");
+        System.out.println(" Every time you guess a letter that isn't in my word, ");
+        System.out.println("      a new body part of the hanging man appears. ");
+        System.out.println("                 Good luck!!!               ");
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println();
+    }
+
+
 }
