@@ -18,3 +18,16 @@ public record GameStatistics(int gamesPlayed, int gamesWon, int bestGuessesRemai
             throw new IllegalArgumentException("bestGuessesRemaining must be >= 0, got " + bestGuessesRemaining);
         }
     }
+
+    public static GameStatistics empty() {
+        return new GameStatistics(0, 0, 0);
+    }
+
+    public GameStatistics withGame(boolean won, int guessesRemaining) {
+        if (guessesRemaining < 0) {
+            throw new IllegalArgumentException("guessesRemaining must be >= 0, got " + guessesRemaining);
+        }
+        // UNDERSTAND: Variable declaration tracking best score. Uses ternary logic to define the first game's baseline.
+        int newBest = (gamesPlayed == 0) ? guessesRemaining : Math.max(bestGuessesRemaining, guessesRemaining);
+        return new GameStatistics(gamesPlayed + 1, gamesWon + (won ? 1 : 0), newBest);
+    }
