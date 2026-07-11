@@ -7,6 +7,9 @@ import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
 import ph.edu.dlsu.lbycpob.hangman.statistics.GameStatistics;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
@@ -206,4 +209,14 @@ public class Hangman implements HangmanGame {
                 "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
 
         System.out.print(content);
+
+        // UNDERSTAND: Input/Output operation writing the final statistical report to a local text file.
+        // DECISION: Writes the reports to statistics.txt using java.nio.file to comply with persistent storage requirements.
+        try {
+            Files.writeString(Path.of("statistics.txt"), content, StandardCharsets.UTF_8);
+            System.out.println("Statistics report saved to statistics.txt");
+        } catch (IOException e) {
+            System.out.println("Could not save statistics file: " + e.getMessage());
+        }
+    }
 }
