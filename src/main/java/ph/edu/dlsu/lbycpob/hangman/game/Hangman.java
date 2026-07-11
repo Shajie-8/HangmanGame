@@ -4,6 +4,7 @@ package ph.edu.dlsu.lbycpob.hangman.game;
 
 import ph.edu.dlsu.lbycpob.hangman.render.HangmanRenderer;
 import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
+import ph.edu.dlsu.lbycpob.hangman.statistics.GameStatistics;
 
 import java.util.Objects;
 import java.util.Random;
@@ -32,4 +33,9 @@ public class Hangman implements HangmanGame {
         this.scanner = new Scanner(System.in);
     }
 
+    @Override
+    public void run() {
+        // UNDERSTAND: Variable declaration of immutable GameStatistics state that accumulates results across games.
+        GameStatistics stats = GameStatistics.empty();
+        boolean playAgain = true;
 }
