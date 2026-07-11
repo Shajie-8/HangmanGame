@@ -88,4 +88,30 @@ public class Hangman implements HangmanGame {
 
             char guess = readGuess(guessedLetters.toString());
             guessedLetters.append(guess);
+
+            // UNDERSTAND: Branch logic evaluates whether the character exists in the secret word string.
+            // DECISION: A simple if-else is used over a switch because we are testing a variable index lookup condition.
+            if (secretWord.indexOf(guess) >= 0) {
+                System.out.println("Correct!");
+                // UNDERSTAND: Branch logic checks if the complete secret word has been revealed.
+                if (isWordGuessed(secretWord, guessedLetters.toString())) {
+                    displayHangman(guessesRemaining);
+                    System.out.println("Secret word : " + secretWord);
+                    System.out.println("Your guesses: " + guessedLetters);
+                    System.out.println("You win! My word was \"" + secretWord + "\".");
+                    return guessesRemaining;
+                }
+            } else {
+                System.out.println("Incorrect.");
+                guessesRemaining--;
+            }
+            System.out.println();
+        }
+
+        displayHangman(0);
+        System.out.println("Secret word : " + secretWord);
+        System.out.println("Your guesses: " + guessedLetters);
+        System.out.println("You lose! My word was \"" + secretWord + "\".");
+        return 0;
+    }
 }
