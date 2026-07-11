@@ -1,6 +1,8 @@
 package ph.edu.dlsu.lbycpob.hangman.repository;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -33,6 +35,26 @@ public final class FileWordRepository implements WordRepository {
             throw new IOException("Word list file is not a readable file: " + filename);
         }
         List<String> words = new ArrayList<>();
+
+        // UNDERSTAND: Input/Output operation utilizing buffered character reading over a UTF-8 stream.
+        // DECISION: Try-with-resources guarantees file resources are automatically closed when leaving block.
+        try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            String line;
+            // UNDERSTAND: Loop terminates when readLine returns null, signifying the end of the file.
+            // DECISION: A while-loop is chosen because the number of lines is dynamic and unknown beforehand.
+            while ((line = reader.readLine()) != null) {
+                String trimmed = line.trim();
+                if (!trimmed.isEmpty()) {
+                    words.add(trimmed.toUpperCase());
+                }
+            }
+        }
+        if (words.isEmpty()) {
+            throw new IOException("Word list file contains no words: " + filename);
+        }
+        return words.get(random.nextInt(words.size()));
+    }
+}
 
 
 
