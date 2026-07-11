@@ -146,4 +146,30 @@ public class Hangman implements HangmanGame {
         }
         return hint.toString();
     }
+
+    @Override
+    public char readGuess(String guessedLetters) {
+        // UNDERSTAND: Loop terminates only when the user inputs a single, valid, un-guessed letter.
+        // DECISION: A while(true) infinite loop is used to handle multiple validation retry attempts cleanly.
+        while (true) {
+            // UNDERSTAND: Input/Output operation prompt on console and reading via the shared Scanner object.
+            System.out.print("Your guess? ");
+            String input = scanner.nextLine().trim().toUpperCase();
+
+            // UNDERSTAND: Branch logic validates length is exactly 1 and is a letter character.
+            // DECISION: Simple if statement handles invalid input length and character sets.
+            if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
+                System.out.println("Type a single letter from A-Z.");
+                continue;
+            }
+
+            char guess = input.charAt(0);
+            // UNDERSTAND: Branch logic checks if this character was already input.
+            if (guessedLetters.indexOf(guess) >= 0) {
+                System.out.println("You already guessed that letter.");
+                continue;
+            }
+            return guess;
+        }
+    }
 }
