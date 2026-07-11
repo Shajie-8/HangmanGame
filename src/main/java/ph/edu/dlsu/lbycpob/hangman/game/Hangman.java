@@ -7,6 +7,7 @@ import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
 import ph.edu.dlsu.lbycpob.hangman.statistics.GameStatistics;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -189,4 +190,20 @@ public class Hangman implements HangmanGame {
             return DEFAULT_WORDS[random.nextInt(DEFAULT_WORDS.length)];
         }
     }
+
+    @Override
+    public void stats(int gamesCount, int gamesWon, int best) {
+        // UNDERSTAND: Computes session metrics and displays them on the console.
+        // DECISION: Converts calculated results into a formatted output block.
+        double winPercent = (gamesCount == 0) ? 0.0 : (gamesWon * 100.0) / gamesCount;
+        String content = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n" +
+                "Overall statistics:\n" +
+                "    Games played: " + gamesCount + "\n" +
+                "    Games won: " + gamesWon + "\n" +
+                "    Win percent: " + String.format(Locale.ROOT, "%.1f%%", winPercent) + "\n" +
+                "    Best game: " + best + " guess(es) remaining\n" +
+                "    Thanks for playing!!!\n" +
+                "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+
+        System.out.print(content);
 }
