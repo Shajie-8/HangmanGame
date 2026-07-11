@@ -219,4 +219,16 @@ public class Hangman implements HangmanGame {
             System.out.println("Could not save statistics file: " + e.getMessage());
         }
     }
+
+    // UNDERSTAND: Iterates over the secret word to check if all letters have been guessed.
+    // DECISION: Returns boolean directly to indicate state check without mutating fields.
+    private boolean isWordGuessed(String secretWord, String guessedLetters) {
+        for (int i = 0; i < secretWord.length(); i++) {
+            char c = secretWord.charAt(i);
+            if (Character.isLetter(c) && guessedLetters.indexOf(c) < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
