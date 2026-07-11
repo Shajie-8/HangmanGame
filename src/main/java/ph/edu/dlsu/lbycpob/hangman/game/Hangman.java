@@ -6,6 +6,7 @@ import ph.edu.dlsu.lbycpob.hangman.render.HangmanRenderer;
 import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
 import ph.edu.dlsu.lbycpob.hangman.statistics.GameStatistics;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -114,4 +115,16 @@ public class Hangman implements HangmanGame {
         System.out.println("You lose! My word was \"" + secretWord + "\".");
         return 0;
     }
+
+    @Override
+    public void displayHangman(int guessCount) {
+        // UNDERSTAND: Invokes the renderer's rendering behavior.
+        // DECISION: Any low-level IOException is wrapped in an unchecked RuntimeException to avoid declaring throws on the game contract.
+        try {
+            renderer.render(guessCount);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not display the hangman picture.", e);
+        }
+    }
+
 }
