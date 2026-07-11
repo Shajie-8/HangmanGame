@@ -127,4 +127,23 @@ public class Hangman implements HangmanGame {
         }
     }
 
+    @Override
+    public String createHint(String secretWord, String guessedLetters) {
+        StringBuilder hint = new StringBuilder();
+
+        // UNDERSTAND: Loop terminates when we reach the end of the secret word (index 'i' equals word length).
+        // DECISION: A standard for-loop is chosen because we are iterating sequentially across a known, finite range.
+        for (int i = 0; i < secretWord.length(); i++) {
+            // UNDERSTAND: Array/Collection operation accessing the character value at index 'i' from the secretWord string.
+            char c = secretWord.charAt(i);
+
+            // UNDERSTAND: Branch logic checks if the character is in the set of guessed characters.
+            if (guessedLetters.indexOf(Character.toUpperCase(c)) >= 0) {
+                hint.append(Character.toUpperCase(c));
+            } else {
+                hint.append('-');
+            }
+        }
+        return hint.toString();
+    }
 }
