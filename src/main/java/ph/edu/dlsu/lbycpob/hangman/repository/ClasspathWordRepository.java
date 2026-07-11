@@ -45,3 +45,12 @@ public final class ClasspathWordRepository implements WordRepository {
                 words.add(line.toUpperCase());
             }
         }
+
+        // UNDERSTAND: Branch logic checks if any valid word was parsed.
+        if (words.isEmpty()) {
+            throw new IOException("Word list resource contains no words: " + resourcePath);
+        }
+        // UNDERSTAND: Array/Collection operation getting a value from a randomized list index.
+        return words.get(random.nextInt(words.size()));
+    }
+}
