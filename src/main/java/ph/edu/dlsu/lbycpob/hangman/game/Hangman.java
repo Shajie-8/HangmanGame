@@ -15,4 +15,10 @@ public class Hangman implements HangmanGame {
     private final WordRepository wordRepository;
     private final String filename;
 
+    // UNDERSTAND: Constants used as fallback data and structural game rules limit.
+    private static final String[] DEFAULT_WORDS = {
+            "JAVA", "HANGMAN", "COMPUTER", "KEYBOARD", "PROGRAM", "ALGORITHM"
+    };
+    private static final int MAX_GUESSES = 8;
+
 }
