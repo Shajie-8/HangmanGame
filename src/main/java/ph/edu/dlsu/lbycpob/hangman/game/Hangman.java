@@ -5,6 +5,7 @@ package ph.edu.dlsu.lbycpob.hangman.game;
 import ph.edu.dlsu.lbycpob.hangman.render.HangmanRenderer;
 import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Hangman implements HangmanGame {
@@ -20,5 +21,15 @@ public class Hangman implements HangmanGame {
             "JAVA", "HANGMAN", "COMPUTER", "KEYBOARD", "PROGRAM", "ALGORITHM"
     };
     private static final int MAX_GUESSES = 8;
+
+    // UNDERSTAND: Constructor to wire up our dependencies.
+    // DECISION: Fail-fast checks ensure that null dependencies are caught immediately upon instantiation.
+    public Hangman(HangmanRenderer renderer, WordRepository wordRepository, Random random, String filename) {
+        this.renderer = Objects.requireNonNull(renderer, "renderer must not be null");
+        this.wordRepository = Objects.requireNonNull(wordRepository, "wordRepository must not be null");
+        this.random = Objects.requireNonNull(random, "random must not be null");
+        this.filename = Objects.requireNonNull(filename, "filename must not be null");
+        this.scanner = new Scanner(System.in);
+    }
 
 }
