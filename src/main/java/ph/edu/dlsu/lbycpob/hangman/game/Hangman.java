@@ -70,5 +70,22 @@ public class Hangman implements HangmanGame {
         System.out.println();
     }
 
+    @Override
+    public int playOneGame(String secretWord) {
+        // UNDERSTAND: Converts the input word to uppercase to maintain case-insensitive game states internally.
+        secretWord = secretWord.toUpperCase();
+        int guessesRemaining = MAX_GUESSES;
+        StringBuilder guessedLetters = new StringBuilder();
 
+        // UNDERSTAND: Loop terminates when the user runs out of guesses (reaches 0) or wins (exits inside the loop).
+        // DECISION: A while-loop is selected because the exit conditions are state-driven rather than count-driven.
+        while (guessesRemaining > 0) {
+            displayHangman(guessesRemaining);
+            String hint = createHint(secretWord, guessedLetters.toString());
+            System.out.println("Secret word : " + hint);
+            System.out.println("Your guesses: " + guessedLetters);
+            System.out.println("Guesses left: " + guessesRemaining);
+
+            char guess = readGuess(guessedLetters.toString());
+            guessedLetters.append(guess);
 }
