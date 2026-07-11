@@ -172,4 +172,21 @@ public class Hangman implements HangmanGame {
             return guess;
         }
     }
+
+    @Override
+    public String getRandomWord(String filename) {
+        // UNDERSTAND: Obtains a random word, catching any IO issue and recovering using a default word list.
+        // DECISION: Fail-fast parameter checks prevent calling repository with blank or null names.
+        Objects.requireNonNull(filename, "filename must not be null");
+        if (filename.isBlank()) {
+            throw new IllegalArgumentException("filename must not be blank");
+        }
+        try {
+            return wordRepository.getRandomWord(filename);
+        } catch (IOException e) {
+            System.out.println("Could not load words from \"" + filename + "\": " + e.getMessage());
+            System.out.println("Using a built-in default word instead.");
+            return DEFAULT_WORDS[random.nextInt(DEFAULT_WORDS.length)];
+        }
+    }
 }
