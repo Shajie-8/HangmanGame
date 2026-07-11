@@ -231,4 +231,19 @@ public class Hangman implements HangmanGame {
         }
         return true;
     }
+
+    // UNDERSTAND: Prompts for a binary choice, repeating until 'Y' or 'N' is entered.
+    // DECISION: Uses a while(true) loop to guarantee we always return a valid boolean decision.
+    private boolean readYesNo(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine().trim().toUpperCase();
+            if (input.equals("Y")) {
+                return true;
+            } else if (input.equals("N")) {
+                return false;
+            }
+            System.out.println("Please enter Y or N.");
+        }
+    }
 }
