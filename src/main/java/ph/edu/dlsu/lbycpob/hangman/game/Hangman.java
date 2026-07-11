@@ -46,4 +46,12 @@ public class Hangman implements HangmanGame {
             int guessesRemaining = playOneGame(secretWord);
             boolean won = guessesRemaining > 0;
             stats = stats.withGame(won, guessesRemaining);
+
+            // UNDERSTAND: Input operation to query if the user wants another game.
+            playAgain = readYesNo("Do you want to play again (Y/N)? ");
+            System.out.println();
+        }
+
+        stats(stats.gamesPlayed(), stats.gamesWon(), stats.bestGuessesRemaining());
+    }
 }
