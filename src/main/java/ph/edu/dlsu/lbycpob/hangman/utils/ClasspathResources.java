@@ -1,4 +1,6 @@
 package ph.edu.dlsu.lbycpob.hangman.utils;
 
-public class ClasspathResources {
-}
+public final class ClasspathResources {
+    private ClasspathResources() {
+        // Utility class - never instantiated.
+    }
