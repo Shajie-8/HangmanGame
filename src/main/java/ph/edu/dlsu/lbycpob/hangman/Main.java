@@ -4,6 +4,7 @@ import ph.edu.dlsu.lbycpob.hangman.game.Hangman;
 import ph.edu.dlsu.lbycpob.hangman.render.AsciiArtRenderer;
 import ph.edu.dlsu.lbycpob.hangman.render.HangmanRenderer;
 import ph.edu.dlsu.lbycpob.hangman.repository.ClasspathWordRepository;
+import ph.edu.dlsu.lbycpob.hangman.repository.FileWordRepository;
 import ph.edu.dlsu.lbycpob.hangman.repository.WordRepository;
 
 import java.io.File;
@@ -30,3 +31,16 @@ public class Main {
         WordRepository repository;
         // UNDERSTAND: Variable declaration of the local File instance to check system file presence.
         File localFile = new File(filename);
+
+        // UNDERSTAND: Branch logic checks if the path represents an existing file on the physical drive.
+        // DECISION: Uses an if-else statement to dynamically choose between Classpath or local File repositories based on file presence.
+        if (localFile.exists() && localFile.isFile()) {
+            repository = new FileWordRepository(random);
+        } else {
+            repository = new ClasspathWordRepository(GAME_ASSETS_BASE_PATH + "/words", random);
+        }
+
+        Hangman game = new Hangman(renderer, repository, random, filename);
+        game.run();
+    }
+}
