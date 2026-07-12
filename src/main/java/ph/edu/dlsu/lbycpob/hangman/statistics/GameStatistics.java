@@ -31,3 +31,12 @@ public record GameStatistics(int gamesPlayed, int gamesWon, int bestGuessesRemai
         int newBest = (gamesPlayed == 0) ? guessesRemaining : Math.max(bestGuessesRemaining, guessesRemaining);
         return new GameStatistics(gamesPlayed + 1, gamesWon + (won ? 1 : 0), newBest);
     }
+
+    public double winPercentage() {
+        return (gamesPlayed == 0) ? 0.0 : (gamesWon * 100.0) / gamesPlayed;
+    }
+
+    public String formattedWinPercentage() {
+        return String.format(Locale.ROOT, "%.1f%%", winPercentage());
+    }
+}
